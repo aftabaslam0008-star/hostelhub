@@ -58,3 +58,4 @@ export default function BrandLogo({ size = 'md', animated = true, showSubtitle =
     </div>
   )
 }
+

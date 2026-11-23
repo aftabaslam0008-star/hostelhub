@@ -8,9 +8,9 @@
 
 | Field | Submission Information |
 | :--- | :--- |
-| **Student Name** | *Aftab Hussain* (or enter your name here) |
-| **Registration Number** | *FA21-BCS-000 / Your Reg No* |
-| **GitHub Repository** | `https://github.com/your-username/hostelhub-project` |
+| **Student Name** | Aftab Aslam |
+| **Registration Number** | (Enter your registration number if required) |
+| **GitHub Repository** | `https://github.com/aftabaslam0008-star/hostelhub.git` |
 | **Live Deployed URL** | `https://hostelhub-portal.vercel.app` (Vercel deployment) |
 | **Google Drive Location** | Organizers Submission Folder (Unzipped complete folder) |
 

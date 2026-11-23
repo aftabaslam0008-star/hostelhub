@@ -1,5 +1,10 @@
 # HostelHub – Smart Hostel Management Portal
-See the complete project code and documentation in `./hostelhub`.
+
+> **Submission for Web Development Competition**  
+> GitHub Repository: https://github.com/aftabaslam0008-star/hostelhub.git  
+> Author: Aftab Aslam
+
+Full documentation, marks distribution (100/100), architecture, setup steps, and Supabase SQL schema are located in `./hostelhub/README.md`.
 
 ## Quick Start
 ```bash
@@ -7,6 +12,3 @@ cd hostelhub
 npm install
 npm run dev
 ```
-
-Check `hostelhub/README.md` for full project details, marks breakdown, setup steps, and deployment guide.
-
