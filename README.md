@@ -27,7 +27,7 @@
 | Field | Submission Details |
 | :--- | :--- |
 | **Student Name** | **Aftab Aslam** |
-| **Registration Number** | *FA21-BCS-000 / Student ID* |
+| **Registration Number** | *FA23-BSE-013 / Student ID* |
 | **GitHub Repository URL** | [https://github.com/aftabaslam0008-star/hostelhub.git](https://github.com/aftabaslam0008-star/hostelhub.git) |
 | **Live Deployed URL** | [https://hostelhub-portal.vercel.app](https://hostelhub-portal.vercel.app) *(or your Vercel deployment link)* |
 | **Google Drive Submission** | Unzipped complete project folder uploaded to designated Drive |
