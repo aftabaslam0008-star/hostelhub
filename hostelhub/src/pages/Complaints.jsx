@@ -76,7 +76,7 @@ export default function Complaints() {
       const [compData, roomData] = await Promise.all([getComplaints(), getRooms()])
       setComplaints(compData || [])
       setRooms(roomData || [])
-    } catch (err) {
+    } catch {
       toast.error('Failed to load complaints')
     } finally {
       setLoading(false)
@@ -112,7 +112,6 @@ export default function Complaints() {
     }
 
     setSelectedFile(file)
-    // Create preview
     const previewUrl = URL.createObjectURL(file)
     setFilePreview(previewUrl)
   }
@@ -192,7 +191,7 @@ export default function Complaints() {
       toast.success(`Complaint status updated to ${statusUpdateData.status}!`)
       setStatusModalComplaint(null)
       loadData()
-    } catch (err) {
+    } catch {
       toast.error('Failed to update status')
     } finally {
       setSubmitting(false)
@@ -206,7 +205,7 @@ export default function Complaints() {
       toast.success('Complaint removed successfully')
       setConfirmDeleteId(null)
       loadData()
-    } catch (err) {
+    } catch {
       toast.error('Failed to delete complaint')
     }
   }
@@ -238,10 +237,10 @@ export default function Complaints() {
       {/* Top Banner & Action */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             Maintenance & Complaints
           </h2>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Report issues, track maintenance tickets, and manage repairs with cloud photos.
           </p>
         </div>
@@ -255,41 +254,41 @@ export default function Complaints() {
 
       {/* KPI Stats */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Tickets</p>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Tickets</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-slate-900">{total}</span>
-            <span className="rounded-lg bg-blue-50 p-2 text-blue-600">
+            <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{total}</span>
+            <span className="rounded-lg bg-blue-50 p-2 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
               <ClipboardList size={20} />
             </span>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pending Review</p>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Pending Review</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-amber-600">{pending}</span>
-            <span className="rounded-lg bg-amber-50 p-2 text-amber-600">
+            <span className="text-3xl font-extrabold text-amber-600 dark:text-amber-400">{pending}</span>
+            <span className="rounded-lg bg-amber-50 p-2 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400">
               <Clock size={20} />
             </span>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">In Progress</p>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">In Progress</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-blue-600">{inProgress}</span>
-            <span className="rounded-lg bg-blue-50 p-2 text-blue-600">
+            <span className="text-3xl font-extrabold text-blue-600 dark:text-blue-400">{inProgress}</span>
+            <span className="rounded-lg bg-blue-50 p-2 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
               <AlertTriangle size={20} />
             </span>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Resolved</p>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Resolved</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-emerald-600">{resolved}</span>
-            <span className="rounded-lg bg-emerald-50 p-2 text-emerald-600">
+            <span className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">{resolved}</span>
+            <span className="rounded-lg bg-emerald-50 p-2 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
               <CheckCircle2 size={20} />
             </span>
           </div>
@@ -297,7 +296,7 @@ export default function Complaints() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xs lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900 lg:flex-row lg:items-center lg:justify-between">
         <div className="relative flex-1">
           <Search size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
@@ -305,50 +304,50 @@ export default function Complaints() {
             placeholder="Search tickets by title, student, room..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-xl border border-slate-200 py-2 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white py-2 pl-10 pr-4 text-sm placeholder-slate-400 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-1.5 bg-slate-50 text-xs text-slate-600">
+          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-1.5 bg-slate-50 dark:border-slate-700 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-300">
             <Filter size={14} />
             <span className="font-semibold">Status:</span>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="bg-transparent font-medium focus:outline-hidden cursor-pointer"
+              className="bg-transparent font-medium focus:outline-hidden cursor-pointer dark:text-white"
             >
-              <option value="All">All Statuses</option>
+              <option value="All" className="dark:bg-slate-900">All Statuses</option>
               {STATUS_LIST.map((s) => (
-                <option key={s} value={s}>{s}</option>
+                <option key={s} value={s} className="dark:bg-slate-900">{s}</option>
               ))}
             </select>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-1.5 bg-slate-50 text-xs text-slate-600">
+          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-1.5 bg-slate-50 dark:border-slate-700 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-300">
             <span className="font-semibold">Category:</span>
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="bg-transparent font-medium focus:outline-hidden cursor-pointer"
+              className="bg-transparent font-medium focus:outline-hidden cursor-pointer dark:text-white"
             >
-              <option value="All">All Categories</option>
+              <option value="All" className="dark:bg-slate-900">All Categories</option>
               {CATEGORIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c} className="dark:bg-slate-900">{c}</option>
               ))}
             </select>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-1.5 bg-slate-50 text-xs text-slate-600">
+          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-1.5 bg-slate-50 dark:border-slate-700 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-300">
             <span className="font-semibold">Priority:</span>
             <select
               value={filterPriority}
               onChange={(e) => setFilterPriority(e.target.value)}
-              className="bg-transparent font-medium focus:outline-hidden cursor-pointer"
+              className="bg-transparent font-medium focus:outline-hidden cursor-pointer dark:text-white"
             >
-              <option value="All">All Priorities</option>
+              <option value="All" className="dark:bg-slate-900">All Priorities</option>
               {PRIORITIES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p} className="dark:bg-slate-900">{p}</option>
               ))}
             </select>
           </div>
@@ -357,10 +356,10 @@ export default function Complaints() {
 
       {/* Complaints List Cards */}
       {filteredComplaints.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
-          <ClipboardList className="mx-auto h-12 w-12 text-slate-300" />
-          <h3 className="mt-3 text-base font-bold text-slate-800">No complaints found</h3>
-          <p className="mt-1 text-sm text-slate-500">
+        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center dark:border-slate-700 dark:bg-slate-900">
+          <ClipboardList className="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600" />
+          <h3 className="mt-3 text-base font-bold text-slate-800 dark:text-slate-200">No complaints found</h3>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             No maintenance records match your filters.
           </p>
         </div>
@@ -373,7 +372,7 @@ export default function Complaints() {
             return (
               <div
                 key={comp.id}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs transition hover:border-slate-300"
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
               >
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   {/* Left Column: Details */}
@@ -383,54 +382,54 @@ export default function Complaints() {
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${
                           comp.priority === 'Urgent'
-                            ? 'bg-red-50 text-red-700 border border-red-200 animate-pulse'
+                            ? 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800 animate-pulse'
                             : comp.priority === 'High'
-                            ? 'bg-orange-50 text-orange-700 border border-orange-200'
+                            ? 'bg-orange-50 text-orange-700 border border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800'
                             : comp.priority === 'Medium'
-                            ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                            : 'bg-slate-100 text-slate-600 border border-slate-200'
+                            ? 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800'
+                            : 'bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'
                         }`}
                       >
                         {comp.priority} Priority
                       </span>
 
                       {/* Category Badge */}
-                      <span className="rounded-md bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-700">
+                      <span className="rounded-md bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
                         {comp.category}
                       </span>
 
                       {/* Room */}
                       {comp.room_number && (
-                        <span className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-bold text-blue-700 border border-blue-100">
+                        <span className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-bold text-blue-700 border border-blue-100 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900">
                           <BedDouble size={12} /> Room {comp.room_number}
                         </span>
                       )}
 
                       {/* Date */}
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-slate-400 dark:text-slate-500">
                         {new Date(comp.created_at).toLocaleDateString()}
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-slate-900">{comp.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{comp.description}</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white">{comp.title}</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{comp.description}</p>
 
                     {/* Student Info */}
-                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                       <User size={13} className="text-slate-400" />
                       <span>
-                        Reported by <strong className="text-slate-700">{comp.student_name || 'Resident'}</strong>
+                        Reported by <strong className="text-slate-700 dark:text-slate-200">{comp.student_name || 'Resident'}</strong>
                         {comp.student_email && ` (${comp.student_email})`}
                       </span>
                     </div>
 
                     {/* Resolution Notes if any */}
                     {comp.resolution_notes && (
-                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-100 text-xs">
-                        <span className="font-bold text-slate-700 flex items-center gap-1.5">
-                          <MessageSquare size={13} className="text-blue-600" /> Warden Resolution Notes:
+                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-100 dark:border-slate-800 dark:bg-slate-800/40 text-xs">
+                        <span className="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                          <MessageSquare size={13} className="text-blue-600 dark:text-blue-400" /> Warden Resolution Notes:
                         </span>
-                        <p className="mt-1 text-slate-600 italic">{comp.resolution_notes}</p>
+                        <p className="mt-1 text-slate-600 dark:text-slate-400 italic">{comp.resolution_notes}</p>
                       </div>
                     )}
                   </div>
@@ -444,7 +443,7 @@ export default function Complaints() {
                           src={comp.attachment_url}
                           alt="Complaint photo"
                           onClick={() => setViewImageModalUrl(comp.attachment_url)}
-                          className="h-20 w-28 rounded-xl object-cover ring-1 ring-slate-200 cursor-pointer shadow-xs transition hover:brightness-90"
+                          className="h-20 w-28 rounded-xl object-cover ring-1 ring-slate-200 dark:ring-slate-700 cursor-pointer shadow-xs transition hover:brightness-90"
                         />
                         <button
                           type="button"
@@ -461,10 +460,10 @@ export default function Complaints() {
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold ${
                           isResolved
-                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
                             : isInProgress
-                            ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                            : 'bg-amber-50 text-amber-700 border border-amber-200'
+                            ? 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800'
+                            : 'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800'
                         }`}
                       >
                         {isResolved ? (
@@ -479,7 +478,7 @@ export default function Complaints() {
 
                       <button
                         onClick={() => handleOpenStatusModal(comp)}
-                        className="cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition"
+                        className="cursor-pointer rounded-xl border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
                       >
                         Update
                       </button>
@@ -487,7 +486,7 @@ export default function Complaints() {
                       <button
                         onClick={() => setConfirmDeleteId(comp.id)}
                         title="Delete ticket"
-                        className="cursor-pointer rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-600 transition"
+                        className="cursor-pointer rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400 transition"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -502,13 +501,13 @@ export default function Complaints() {
 
       {/* Add Complaint Modal with Cloud Storage File Upload */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-              <h3 className="text-lg font-bold text-slate-900">Submit Maintenance Request</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl dark:border dark:border-slate-800 dark:bg-slate-900 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Submit Maintenance Request</h3>
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="cursor-pointer rounded-lg p-1 text-slate-400 hover:bg-slate-100"
+                className="cursor-pointer rounded-lg p-1 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <X size={20} />
               </button>
@@ -516,7 +515,7 @@ export default function Complaints() {
 
             <form onSubmit={handleSubmitComplaint} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Issue Title *
                 </label>
                 <input
@@ -525,19 +524,19 @@ export default function Complaints() {
                   placeholder="e.g. Geyser water not heating in bathroom"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
+                  className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Category
                   </label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
+                    className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -546,13 +545,13 @@ export default function Complaints() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Priority
                   </label>
                   <select
                     value={formData.priority}
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
+                    className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
                   >
                     {PRIORITIES.map((p) => (
                       <option key={p} value={p}>{p}</option>
@@ -563,13 +562,13 @@ export default function Complaints() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Affected Room
                   </label>
                   <select
                     value={formData.room_number}
                     onChange={(e) => setFormData({ ...formData, room_number: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
+                    className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
                   >
                     <option value="">General Hostel Facility</option>
                     {rooms.map((r) => (
@@ -581,7 +580,7 @@ export default function Complaints() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Student Name
                   </label>
                   <input
@@ -589,13 +588,13 @@ export default function Complaints() {
                     placeholder="Resident Name"
                     value={formData.student_name}
                     onChange={(e) => setFormData({ ...formData, student_name: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
+                    className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Detailed Description *
                 </label>
                 <textarea
@@ -604,21 +603,21 @@ export default function Complaints() {
                   placeholder="Explain the problem in detail to help maintenance staff prepare..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
+                  className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
 
               {/* Supabase Storage File Upload Area */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Attachment / Photo (Supabase Cloud Storage)
                 </label>
-                <p className="text-[11px] text-slate-500 mb-2">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mb-2">
                   Upload an image of the defect (JPG, PNG, WebP up to 5MB).
                 </p>
 
                 {filePreview ? (
-                  <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-2">
+                  <div className="relative rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-2">
                     <img
                       src={filePreview}
                       alt="Upload preview"
@@ -631,17 +630,17 @@ export default function Complaints() {
                     >
                       <X size={16} />
                     </button>
-                    <p className="mt-2 text-center text-xs font-medium text-slate-600 truncate">
+                    <p className="mt-2 text-center text-xs font-medium text-slate-600 dark:text-slate-300 truncate">
                       {selectedFile?.name}
                     </p>
                   </div>
                 ) : (
-                  <label className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-6 hover:bg-slate-50 hover:border-blue-400 transition">
-                    <Upload className="h-8 w-8 text-blue-600" />
-                    <span className="mt-2 text-xs font-bold text-slate-700">
+                  <label className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 p-6 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-blue-400 transition">
+                    <Upload className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                    <span className="mt-2 text-xs font-bold text-slate-700 dark:text-slate-300">
                       Click to choose photo or drag & drop
                     </span>
-                    <span className="mt-0.5 text-[10px] text-slate-400">
+                    <span className="mt-0.5 text-[10px] text-slate-400 dark:text-slate-500">
                       Files are securely stored in Supabase Storage bucket
                     </span>
                     <input
@@ -654,11 +653,11 @@ export default function Complaints() {
                 )}
               </div>
 
-              <div className="mt-6 flex justify-end gap-3 pt-3 border-t border-slate-100">
+              <div className="mt-6 flex justify-end gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="cursor-pointer rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                  className="cursor-pointer rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
                 >
                   Cancel
                 </button>
@@ -681,13 +680,13 @@ export default function Complaints() {
 
       {/* Update Status Modal */}
       {statusModalComplaint && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="text-base font-bold text-slate-900">Update Ticket Status</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:border dark:border-slate-800 dark:bg-slate-900">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Update Ticket Status</h3>
               <button
                 onClick={() => setStatusModalComplaint(null)}
-                className="cursor-pointer rounded-lg p-1 text-slate-400 hover:bg-slate-100"
+                className="cursor-pointer rounded-lg p-1 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <X size={18} />
               </button>
@@ -695,7 +694,7 @@ export default function Complaints() {
 
             <form onSubmit={handleSaveStatus} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Ticket Status
                 </label>
                 <select
@@ -703,7 +702,7 @@ export default function Complaints() {
                   onChange={(e) =>
                     setStatusUpdateData({ ...statusUpdateData, status: e.target.value })
                   }
-                  className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
+                  className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
                 >
                   {STATUS_LIST.map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -712,7 +711,7 @@ export default function Complaints() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Resolution Notes / Warden Feedback
                 </label>
                 <textarea
@@ -722,7 +721,7 @@ export default function Complaints() {
                   onChange={(e) =>
                     setStatusUpdateData({ ...statusUpdateData, resolution_notes: e.target.value })
                   }
-                  className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
+                  className="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
 
@@ -730,7 +729,7 @@ export default function Complaints() {
                 <button
                   type="button"
                   onClick={() => setStatusModalComplaint(null)}
-                  className="cursor-pointer rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                  className="cursor-pointer rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>

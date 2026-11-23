@@ -71,3 +71,4 @@ export async function uploadFile(file, folder = 'complaints') {
     reader.readAsDataURL(file)
   })
 }
+

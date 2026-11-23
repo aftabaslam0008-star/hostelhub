@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Building2, Mail, Lock, User, UserPlus, Eye, EyeOff, Shield } from 'lucide-react'
+import { Mail, Lock, User, UserPlus, Eye, EyeOff, Shield } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { isValidEmail, isValidPassword } from '../utils/validators'
+import BrandLogo from '../components/common/BrandLogo'
 
 export default function Register() {
   const [displayName, setDisplayName] = useState('')
@@ -50,14 +51,11 @@ export default function Register() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-xl shadow-blue-500/30">
-            <Building2 size={32} />
-          </div>
-        </div>
-        <h2 className="mt-4 text-center text-3xl font-extrabold tracking-tight text-white">
+    <div className="flex min-h-screen flex-col justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center">
+        {/* Animated Brand Logo */}
+        <BrandLogo size="lg" animated={true} showSubtitle={true} />
+        <h2 className="mt-5 text-center text-3xl font-extrabold tracking-tight text-white">
           Create an Account
         </h2>
         <p className="mt-1 text-center text-sm text-slate-400">

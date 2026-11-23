@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Building2, Mail, Lock, LogIn, Sparkles, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, LogIn, Sparkles, Eye, EyeOff } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { isValidEmail } from '../utils/validators'
+import BrandLogo from '../components/common/BrandLogo'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -46,18 +47,15 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-xl shadow-blue-500/30">
-            <Building2 size={32} />
-          </div>
-        </div>
-        <h2 className="mt-4 text-center text-3xl font-extrabold tracking-tight text-white">
+    <div className="flex min-h-screen flex-col justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center">
+        {/* Animated Brand Logo */}
+        <BrandLogo size="lg" animated={true} showSubtitle={true} />
+        <h2 className="mt-5 text-center text-3xl font-extrabold tracking-tight text-white">
           Welcome to HostelHub
         </h2>
         <p className="mt-1 text-center text-sm text-slate-400">
-          Sign in to access student management, rooms & complaints
+          Sign in to access resident directory, rooms & maintenance
         </p>
       </div>
 
@@ -66,7 +64,7 @@ export default function Login() {
           {/* Quick Demo Fill Buttons for Judges */}
           <div className="mb-6 rounded-2xl border border-blue-500/30 bg-blue-950/40 p-4">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400">
-              <Sparkles size={14} /> Quick Demo Access (Judges & Evaluation)
+              <Sparkles size={14} className="animate-spin-slow" /> Quick Demo Access (Judges & Evaluation)
             </div>
             <p className="mt-1 text-xs text-slate-300">
               Instant 1-click login without typing credentials:

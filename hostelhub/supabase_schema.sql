@@ -123,3 +123,4 @@ VALUES
     ('comp-103', 'Wi-Fi router dead in 2nd floor east wing', 'Students in Rooms 201-203 cannot connect to hostel high-speed internet. Access point LED is flashing red.', 'Internet', 'Urgent', '201', 'Alex Morgan', 'alex.morgan@hostelhub.com', 'Pending', 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80', ''),
     ('comp-104', 'Study chair leg cracked and unstable', 'Wooden study desk chair broke near rear joint during study session.', 'Furniture', 'Low', '103', 'Bilal Tariq', 'bilal.tariq@student.edu', 'Resolved', 'https://images.unsplash.com/photo-1580481077195-c328ad4f4f7c?auto=format&fit=crop&w=800&q=80', 'Replaced with new ergonomic study chair from hostel inventory.')
 ON CONFLICT (id) DO NOTHING;
+

@@ -9,3 +9,4 @@ npm run dev
 ```
 
 Check `hostelhub/README.md` for full project details, marks breakdown, setup steps, and deployment guide.
+

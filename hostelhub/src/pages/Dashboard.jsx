@@ -43,12 +43,17 @@ import { resetRoomsLocal } from '../services/roomService'
 import { resetStudentsLocal } from '../services/studentService'
 import { resetComplaintsLocal } from '../services/complaintService'
 import Loader from '../components/common/Loader'
+import BrandLogo from '../components/common/BrandLogo'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 
 const PIE_COLORS = ['#f59e0b', '#3b82f6', '#10b981'] // Pending, In Progress, Resolved
 
 export default function Dashboard() {
   const { user } = useAuth()
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+
   const [students, setStudents] = useState([])
   const [rooms, setRooms] = useState([])
   const [complaints, setComplaints] = useState([])
@@ -69,7 +74,7 @@ export default function Dashboard() {
       setStudents(studentsRes || [])
       setRooms(roomsRes || [])
       setComplaints(compRes || [])
-    } catch (err) {
+    } catch {
       toast.error('Failed to load hostel data')
     } finally {
       setLoading(false)
@@ -178,12 +183,12 @@ export default function Dashboard() {
       case 'cloud-sun':
         return <CloudSun className="h-8 w-8 text-amber-500" />
       case 'cloud':
-        return <Cloud className="h-8 w-8 text-slate-500" />
+        return <Cloud className="h-8 w-8 text-slate-400" />
       case 'cloud-rain':
       case 'cloud-drizzle':
-        return <CloudRain className="h-8 w-8 text-blue-500" />
+        return <CloudRain className="h-8 w-8 text-blue-400" />
       case 'cloud-lightning':
-        return <CloudLightning className="h-8 w-8 text-purple-500" />
+        return <CloudLightning className="h-8 w-8 text-purple-400" />
       case 'snowflake':
         return <Snowflake className="h-8 w-8 text-cyan-400" />
       default:
@@ -195,18 +200,18 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Header Greeting & Quick Actions */}
+      {/* Animated Brand Banner & Quick Actions */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          <div className="flex items-center gap-3">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
               Welcome back, {user?.displayName || 'Hostel Warden'}!
             </h2>
-            <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-bold text-blue-700">
+            <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-bold text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
               {user?.role || 'Staff'}
             </span>
           </div>
-          <p className="mt-0.5 text-sm text-slate-500">
+          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
             Hostel operations, room occupancies, and maintenance live summary.
           </p>
         </div>
@@ -214,13 +219,13 @@ export default function Dashboard() {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             to="/students"
-            className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition"
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition"
           >
             <Plus size={15} /> Student
           </Link>
           <Link
             to="/rooms"
-            className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition"
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition"
           >
             <Plus size={15} /> Room
           </Link>
@@ -233,7 +238,7 @@ export default function Dashboard() {
           <button
             onClick={handleResetData}
             title="Reload initial demo dataset"
-            className="cursor-pointer rounded-xl border border-slate-200 bg-white p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition"
+            className="cursor-pointer rounded-xl border border-slate-200 bg-white p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-800 dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700 transition"
           >
             <RotateCcw size={15} />
           </button>
@@ -243,62 +248,62 @@ export default function Dashboard() {
       {/* Metric Cards Row */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {/* Total Students */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Total Residents
             </p>
-            <span className="rounded-xl bg-blue-50 p-2 text-blue-600">
+            <span className="rounded-xl bg-blue-50 p-2 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
               <Users size={20} />
             </span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-slate-900">{totalStudents}</span>
-            <span className="text-xs font-medium text-emerald-600">
+            <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{totalStudents}</span>
+            <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
               ({activeStudents} active)
             </span>
           </div>
-          <p className="mt-2 text-xs text-slate-400">All registered student occupants</p>
+          <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">All registered student occupants</p>
         </div>
 
         {/* Total Rooms & Available Beds */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Room Capacity
             </p>
-            <span className="rounded-xl bg-indigo-50 p-2 text-indigo-600">
+            <span className="rounded-xl bg-indigo-50 p-2 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400">
               <BedDouble size={20} />
             </span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-slate-900">{totalRooms}</span>
-            <span className="text-xs font-medium text-slate-500">
+            <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{totalRooms}</span>
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
               ({totalCapacity} total beds)
             </span>
           </div>
-          <p className="mt-2 text-xs text-emerald-600 font-semibold">
+          <p className="mt-2 text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
             {availableBeds} beds currently available
           </p>
         </div>
 
         {/* Occupancy Rate */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Occupancy Rate
             </p>
-            <span className="rounded-xl bg-emerald-50 p-2 text-emerald-600">
+            <span className="rounded-xl bg-emerald-50 p-2 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
               <CheckCircle2 size={20} />
             </span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-slate-900">{occupancyRate}%</span>
-            <span className="text-xs font-medium text-slate-500">
+            <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{occupancyRate}%</span>
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
               {occupiedBeds}/{totalCapacity} occupied
             </span>
           </div>
-          <div className="mt-3 h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+          <div className="mt-3 h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
             <div
               className={`h-full rounded-full transition-all ${
                 occupancyRate > 90 ? 'bg-red-500' : occupancyRate > 70 ? 'bg-amber-500' : 'bg-emerald-500'
@@ -309,33 +314,33 @@ export default function Dashboard() {
         </div>
 
         {/* Complaints */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Active Issues
             </p>
-            <span className="rounded-xl bg-amber-50 p-2 text-amber-600">
+            <span className="rounded-xl bg-amber-50 p-2 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400">
               <ClipboardList size={20} />
             </span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-slate-900">
+            <span className="text-3xl font-extrabold text-slate-900 dark:text-white">
               {pendingComplaints + inProgressComplaints}
             </span>
             {urgentComplaints > 0 && (
-              <span className="rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700 animate-pulse">
+              <span className="rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700 animate-pulse dark:bg-red-950 dark:text-red-300">
                 {urgentComplaints} URGENT
               </span>
             )}
           </div>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
             {pendingComplaints} pending · {resolvedComplaints} resolved
           </p>
         </div>
       </div>
 
       {/* EXTERNAL API SHOWCASE: Live Weather & Hostel Environment Control */}
-      <div className="rounded-3xl border border-blue-200/80 bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 p-6 text-white shadow-xl">
+      <div className="rounded-3xl border border-blue-200/80 bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 p-6 text-white shadow-xl dark:border-blue-900/50">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500/20 text-blue-300">
@@ -462,24 +467,24 @@ export default function Dashboard() {
       {/* Analytics Charts Row */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Chart 1: Room Occupancy Breakdown */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Room Occupancy by Type</h3>
-              <p className="text-xs text-slate-500">Total capacity vs currently assigned residents</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Room Occupancy by Type</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Total capacity vs currently assigned residents</p>
             </div>
-            <Link to="/rooms" className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+            <Link to="/rooms" className="text-xs font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400">
               View Rooms →
             </Link>
           </div>
           <div className="mt-4 h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={roomTypeChartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <XAxis dataKey="type" tick={{ fontSize: 12, fill: '#64748b' }} />
-                <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748b' }} />
+                <XAxis dataKey="type" tick={{ fontSize: 12, fill: isDark ? '#94a3b8' : '#64748b' }} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: isDark ? '#94a3b8' : '#64748b' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1e293b',
+                    backgroundColor: isDark ? '#0f172a' : '#1e293b',
                     borderRadius: '12px',
                     color: '#fff',
                     border: 'none',
@@ -487,7 +492,7 @@ export default function Dashboard() {
                   }}
                 />
                 <Legend wrapperStyle={{ fontSize: '12px' }} />
-                <Bar dataKey="capacity" name="Total Beds" fill="#cbd5e1" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="capacity" name="Total Beds" fill={isDark ? '#334155' : '#cbd5e1'} radius={[6, 6, 0, 0]} />
                 <Bar dataKey="occupied" name="Occupied" fill="#2563eb" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -495,13 +500,13 @@ export default function Dashboard() {
         </div>
 
         {/* Chart 2: Complaints Status Distribution */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Maintenance Tickets Breakdown</h3>
-              <p className="text-xs text-slate-500">Distribution by current resolution status</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Maintenance Tickets Breakdown</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Distribution by current resolution status</p>
             </div>
-            <Link to="/complaints" className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+            <Link to="/complaints" className="text-xs font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400">
               Manage Tickets →
             </Link>
           </div>
@@ -531,7 +536,7 @@ export default function Dashboard() {
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: '#1e293b',
+                      backgroundColor: isDark ? '#0f172a' : '#1e293b',
                       borderRadius: '12px',
                       color: '#fff',
                       border: 'none',
@@ -549,30 +554,30 @@ export default function Dashboard() {
       {/* Recent Activity Lists */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Recent Students */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-            <h3 className="text-base font-bold text-slate-900">Recent Student Registrations</h3>
-            <Link to="/students" className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Recent Student Registrations</h3>
+            <Link to="/students" className="text-xs font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400">
               View All ({students.length})
             </Link>
           </div>
-          <div className="mt-3 divide-y divide-slate-100">
+          <div className="mt-3 divide-y divide-slate-100 dark:divide-slate-800">
             {students.slice(0, 4).map((student) => (
               <div key={student.id} className="flex items-center justify-between py-3">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700 dark:bg-blue-950 dark:text-blue-400">
                     {student.name.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-slate-800">{student.name}</p>
-                    <p className="text-xs text-slate-500">{student.email}</p>
+                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">{student.name}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{student.email}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="inline-block rounded-md bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-700">
+                  <span className="inline-block rounded-md bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
                     {student.room_number ? `Room ${student.room_number}` : 'Unallocated'}
                   </span>
-                  <p className="text-[10px] text-slate-400 mt-0.5">
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
                     {student.admission_date || 'Enrolled'}
                   </p>
                 </div>
@@ -582,19 +587,19 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Complaints */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-            <h3 className="text-base font-bold text-slate-900">Recent Maintenance Requests</h3>
-            <Link to="/complaints" className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Recent Maintenance Requests</h3>
+            <Link to="/complaints" className="text-xs font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400">
               View All ({complaints.length})
             </Link>
           </div>
-          <div className="mt-3 divide-y divide-slate-100">
+          <div className="mt-3 divide-y divide-slate-100 dark:divide-slate-800">
             {complaints.slice(0, 4).map((comp) => (
               <div key={comp.id} className="flex items-center justify-between py-3">
                 <div className="space-y-0.5 max-w-[70%]">
-                  <p className="text-sm font-semibold text-slate-800 truncate">{comp.title}</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">{comp.title}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     Room {comp.room_number || 'General'} · {comp.category}
                   </p>
                 </div>
@@ -602,15 +607,15 @@ export default function Dashboard() {
                   <span
                     className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
                       comp.status === 'Resolved'
-                        ? 'bg-emerald-50 text-emerald-700'
+                        ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300'
                         : comp.status === 'In Progress'
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'bg-amber-50 text-amber-700'
+                        ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300'
+                        : 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300'
                     }`}
                   >
                     {comp.status}
                   </span>
-                  <p className="text-[10px] text-slate-400 mt-0.5">{comp.priority} Priority</p>
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">{comp.priority} Priority</p>
                 </div>
               </div>
             ))}
