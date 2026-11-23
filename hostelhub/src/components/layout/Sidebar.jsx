@@ -27,6 +27,11 @@ export default function Sidebar({ mobileOpen = false, onClose }) {
   const { user, logout } = useAuth()
   const { theme, toggleTheme } = useTheme()
 
+  const handleLinkClick = () => {
+    onClose?.()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       {/* Mobile backdrop */}
@@ -37,9 +42,12 @@ export default function Sidebar({ mobileOpen = false, onClose }) {
         />
       )}
 
-      {/* Sidebar container */}
+      {/* Sidebar container:
+          - lg:sticky lg:top-0 lg:h-screen lg:self-start: Stays with the user during scroll ("sath run kare")
+          - overflow-y-auto overscroll-contain: Allows smooth scrolling inside sidebar so nothing is cut off
+      */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col justify-between border-r border-slate-200 bg-white transition-all duration-300 dark:border-slate-800 dark:bg-slate-900 lg:static lg:w-64 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col justify-between border-r border-slate-200 bg-white transition-all duration-300 dark:border-slate-800 dark:bg-slate-900 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:self-start lg:translate-x-0 overflow-y-auto overscroll-contain scrollbar-thin ${
           mobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         }`}
       >
@@ -62,7 +70,7 @@ export default function Sidebar({ mobileOpen = false, onClose }) {
                 key={to}
                 to={to}
                 end={to === '/'}
-                onClick={onClose}
+                onClick={handleLinkClick}
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold transition ${
                     isActive
@@ -82,7 +90,7 @@ export default function Sidebar({ mobileOpen = false, onClose }) {
           </nav>
 
           {/* Live Feature Highlights Pill with Theme Switcher */}
-          <div className="mt-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/60 p-4 border border-blue-100/80 dark:from-blue-950/40 dark:to-slate-800/80 dark:border-slate-800">
+          <div className="mt-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50/60 p-4 border border-blue-100/80 dark:from-blue-950/40 dark:to-slate-800/80 dark:border-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5 text-blue-700 dark:text-blue-400 font-bold text-xs uppercase tracking-wider">
                 <Sparkles size={14} className="animate-spin-slow" /> Cloud Connected
@@ -101,8 +109,8 @@ export default function Sidebar({ mobileOpen = false, onClose }) {
           </div>
         </div>
 
-        {/* User Card at bottom */}
-        <div className="border-t border-slate-200 dark:border-slate-800 p-4">
+        {/* User Card at bottom - Sticky at bottom of sidebar */}
+        <div className="sticky bottom-0 mt-auto border-t border-slate-200 bg-white/95 backdrop-blur-xs p-4 dark:border-slate-800 dark:bg-slate-900/95">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 overflow-hidden">
               {user?.photoURL ? (
